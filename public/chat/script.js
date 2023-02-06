@@ -26,14 +26,33 @@ window.addEventListener('DOMContentsLoad', () => {
                                 break;
                             }
                             case 'users': {
-                                eventEmitter.emit('webrtc-mode', json.data);
                                 for (const user of json.data.users) {
-
+                                    if (!usermap.has(user)) {
+                                        const div = documen.createElement('span');
+                                        div.textContent = user;
+                                        usermap.set(user, div);
+                                        users.appendChild(div);
+                                    }
+                                }
+                                if (json.data.event.type === 'leave') {
+                                    const div = usermap.get(json.data.event.user);
+                                    div.remove();
+                                    usermap.delete(json.data.event.user);
                                 }
                                 break;
                             }
                             case 'signal': {
-                                eventEmitter.emit('draw', json.data.lines);
+                                const outer = document.createElement('div');
+                                const from = document.createElement('span');
+                                from.textContent = json.data.sender;
+                                outer.appendChild(from);
+                                const to = document.createElement('span');
+                                to.textContent = json.data.receiver.join(',');
+                                outer.appendChild(to);
+                                const message = document.createElement('span');
+                                message.textCotent = json.data.message;
+                                outer.appedChild(message);
+                                messages.appendChild(outer);
                                 break;
                             }
                             default: {
