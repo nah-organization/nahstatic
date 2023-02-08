@@ -6,6 +6,8 @@ window.addEventListener('DOMContentsLoad', () => {
     const code = document.getElementById('code');
     const users = document.getElementById('users');
     const messages = document.getElementById('messages');
+    const input = document.getElementById('input');
+    const send = document.getElementById('send');
 
     const usermap = new Map();
 
@@ -27,10 +29,14 @@ window.addEventListener('DOMContentsLoad', () => {
                     case 'users': {
                         for (const user of json.data.users) {
                             if (!usermap.has(user)) {
-                                const div = documen.createElement('span');
-                                div.textContent = user;
-                                usermap.set(user, div);
-                                users.appendChild(div);
+                                const label = documen.createElement('label');
+                                label.textContent = user;
+                                label.for = user;
+                                const input = documen.createElement('checkbox');
+                                input.id = user;
+                                label.appedChild(input);
+                                usermap.set(user, [label, input]);
+                                users.appendChild(label);
                             }
                         }
                         if (json.data.event.type === 'leave') {
@@ -61,6 +67,17 @@ window.addEventListener('DOMContentsLoad', () => {
             } catch (error) {
                 console.error(error);
             }
+        });
+        send.addEventListener('click', () => {
+            const message = input.value;
+            const receivers = [...usermap].filter(v => v[1][1].checked).map(v => v[0]);
+            websocket.send(JSON.stringify({
+                type: 'signal',
+                data: {
+                    receivers,
+                    message
+                }
+            }));
         });
         websocket.send(JSON.stringify({
             type: 'join'
