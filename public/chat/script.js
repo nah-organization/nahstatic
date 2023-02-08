@@ -52,6 +52,14 @@ window.addEventListener('DOMContentLoaded', () => {
                             div[0].remove();
                             usermap.delete(json.data.event.user);
                         }
+                        const outer = document.createElement('div');
+                        const eventType = document.createElement('span');
+                        eventType.textContent = json.data.event.type;
+                        outer.appendChild(eventType);
+                        const target = document.createElement('span');
+                        target.textContent = json.data.event.user;
+                        outer.appendChild(target);
+                        messages.appendChild(outer);
                         break;
                     }
                     case 'signal': {
