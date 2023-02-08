@@ -34,7 +34,7 @@ window.addEventListener('DOMContentLoaded', () => {
                                 label.for = user;
                                 const input = document.createElement('checkbox');
                                 input.id = user;
-                                label.appedChild(input);
+                                label.appendChild(input);
                                 usermap.set(user, [label, input]);
                                 users.appendChild(label);
                             }
@@ -56,7 +56,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         outer.appendChild(to);
                         const message = document.createElement('span');
                         message.textCotent = json.data.message;
-                        outer.appedChild(message);
+                        outer.appendChild(message);
                         messages.appendChild(outer);
                         break;
                     }
