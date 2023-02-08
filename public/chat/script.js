@@ -63,7 +63,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         to.textContent = json.data.receivers.join(',');
                         outer.appendChild(to);
                         const message = document.createElement('span');
-                        message.textCotent = json.data.data;
+                        message.textContent = json.data.data;
                         outer.appendChild(message);
                         messages.appendChild(outer);
                         break;
