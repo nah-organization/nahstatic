@@ -1,4 +1,4 @@
-const signalingServer = 'wss://signal.nahsns.ga/';
+const signalingServer = 'wss://signal.nahsns.ga:10443/';
 
 
 window.addEventListener('DOMContentLoaded', () => {
