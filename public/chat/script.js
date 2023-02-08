@@ -49,7 +49,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         }
                         if (json.data.event.type === 'leave') {
                             const div = usermap.get(json.data.event.user);
-                            div[1][0].remove();
+                            div[0].remove();
                             usermap.delete(json.data.event.user);
                         }
                         break;
