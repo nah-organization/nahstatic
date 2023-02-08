@@ -68,20 +68,22 @@ window.addEventListener('DOMContentLoaded', () => {
                 console.error(error);
             }
         });
-        send.addEventListener('click', () => {
-            const message = input.value;
-            const receivers = [...usermap].filter(v => v[1][1].checked).map(v => v[0]);
+        websocket.addEventListener('open', () => {
+            send.addEventListener('click', () => {
+                const message = input.value;
+                const receivers = [...usermap].filter(v => v[1][1].checked).map(v => v[0]);
+                websocket.send(JSON.stringify({
+                    type: 'signal',
+                    data: {
+                        receivers,
+                        message
+                    }
+                }));
+            });
             websocket.send(JSON.stringify({
-                type: 'signal',
-                data: {
-                    receivers,
-                    message
-                }
+                type: 'join'
             }));
         });
-        websocket.send(JSON.stringify({
-            type: 'join'
-        }));
     };
 
     create.addEventListener('click', () => {
