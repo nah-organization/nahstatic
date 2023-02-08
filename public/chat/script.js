@@ -10,9 +10,9 @@ window.addEventListener('DOMContentLoaded', () => {
     const send = document.getElementById('send');
 
     const usermap = new Map();
+    let page = null;
 
     const listen = (websocket) => {
-        let page = null;
         websocket.addEventListener('message', event => {
             const message = '' + event.data;
             if (message === 'ping') {
