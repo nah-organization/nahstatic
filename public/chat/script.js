@@ -32,8 +32,9 @@ window.addEventListener('DOMContentLoaded', () => {
                                 const label = document.createElement('label');
                                 label.textContent = user;
                                 label.for = user;
-                                const input = document.createElement('checkbox');
+                                const input = document.createElement('input');
                                 input.id = user;
+                                input.type = 'checkbox';
                                 label.appendChild(input);
                                 usermap.set(user, [label, input]);
                                 users.appendChild(label);
