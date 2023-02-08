@@ -11,6 +11,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const usermap = new Map();
     let page = null;
+    let me = null;
 
     const listen = (websocket) => {
         websocket.addEventListener('message', event => {
@@ -28,6 +29,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         break;
                     }
                     case 'users': {
+                        me = json.data.me;
                         for (const user of json.data.users) {
                             if (!usermap.has(user)) {
                                 const label = document.createElement('label');
@@ -36,6 +38,10 @@ window.addEventListener('DOMContentLoaded', () => {
                                 const input = document.createElement('input');
                                 input.id = user;
                                 input.type = 'checkbox';
+                                if (user === me) {
+                                    input.checked = true;
+                                    input.disabled = true;
+                                }
                                 label.appendChild(input);
                                 usermap.set(user, [label, input]);
                                 users.appendChild(label);
@@ -54,7 +60,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         from.textContent = json.data.sender;
                         outer.appendChild(from);
                         const to = document.createElement('span');
-                        to.textContent = json.data.receiver.join(',');
+                        to.textContent = json.data.receivers.join(',');
                         outer.appendChild(to);
                         const message = document.createElement('span');
                         message.textCotent = json.data.message;
