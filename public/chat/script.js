@@ -29,10 +29,10 @@ window.addEventListener('DOMContentLoaded', () => {
                     case 'users': {
                         for (const user of json.data.users) {
                             if (!usermap.has(user)) {
-                                const label = documen.createElement('label');
+                                const label = document.createElement('label');
                                 label.textContent = user;
                                 label.for = user;
-                                const input = documen.createElement('checkbox');
+                                const input = document.createElement('checkbox');
                                 input.id = user;
                                 label.appedChild(input);
                                 usermap.set(user, [label, input]);
