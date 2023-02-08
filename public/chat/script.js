@@ -1,7 +1,7 @@
 const signalingServer = 'wss://signal.nahsns.ga/';
 
 
-window.addEventListener('DOMContentsLoad', () => {
+window.addEventListener('DOMContentsLoaded', () => {
     const create = document.getElementById('create');
     const code = document.getElementById('code');
     const users = document.getElementById('users');
