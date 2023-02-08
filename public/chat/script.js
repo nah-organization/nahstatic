@@ -24,6 +24,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 switch (json.type) {
                     case 'room': {
                         page = json.data.id;
+                        code.value = page;
                         break;
                     }
                     case 'users': {
